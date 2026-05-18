@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>It's Raining Burgers | Hamburgueria Artesanal</title>
+  <meta name="description" content="Hamburgueria artesanal em Curitiba. Burgers feitos com ingredientes frescos e muito sabor.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Oculta login e admin por padrão; mostra com :target */
+    #view-login,
+    #view-admin { display: none; }
+
+    #view-login:target,
+    #view-admin:target { display: block; }
+
+    /* Esconde o site quando login ou admin estão ativos */
+    #view-login:target ~ #view-site,
+    #view-admin:target ~ #view-site { display: none; }
+
+    /* Fundo cinza no body quando login ou admin estão ativos */
+    body:has(#view-login:target),
+    body:has(#view-admin:target) { background-color: var(--cinza-claro); }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       VIEW: LOGIN
+  ============================================================ -->
+  <div id="view-login">
+
+    <header class="header">
+      <nav class="nav container">
+        <a href="#inicio" class="logo">It's Raining <span>Burgers</span></a>
+        <ul class="nav-menu">
+          <li><a href="#cardapio" class="nav-link">Cardápio</a></li>
+          <li><a href="#contato"  class="nav-link">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="login-main">
+      <div class="login-box">
+
+        <a href="#inicio" class="login-voltar">← Voltar ao site</a>
+        <h1>Acesse sua conta</h1>
+        <p class="login-sub">Entre como cliente ou administrador</p>
+
+        <!-- Seletor de tipo de acesso -->
+        <div class="login-tipo">
+          <input type="radio" name="tipo" id="tipo-cliente" class="tipo-input" checked>
+          <input type="radio" name="tipo" id="tipo-admin"   class="tipo-input">
+          <label for="tipo-cliente" class="tipo-tab">Cliente</label>
+          <label for="tipo-admin"   class="tipo-tab">Administrador</label>
+        </div>
+
+        <!-- Formulário de Login -->
+        <form class="login-form" action="#" method="post">
+          <div class="form-grupo">
+            <label for="login-email">E-mail</label>
+            <input type="email" id="login-email" name="email" placeholder="seu@email.com" required>
+          </div>
+          <div class="form-grupo">
+            <label for="login-senha">Senha</label>
+            <input type="password" id="login-senha" name="senha" placeholder="Sua senha" required>
+          </div>
+          <a href="#view-admin" class="btn btn-primary btn-block">Entrar</a>
+        </form>
+
+        <div class="login-links">
+          <a href="#">Esqueci minha senha</a>
+          <span>·</span>
+          <a href="#">Criar conta</a>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       VIEW: ADMIN
+  ============================================================ -->
+  <div id="view-admin">
+
+    <header class="header">
+      <nav class="nav container">
+        <a href="#inicio" class="logo">It's Raining <span>Burgers</span></a>
+        <ul class="nav-menu">
+          <li><a href="#inicio"     class="nav-link">Ver Site</a></li>
+          <li><a href="#view-login" class="nav-link">Sair</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="admin-main container">
+
+      <div class="admin-topo">
+        <div>
+          <h1 class="admin-titulo">Painel do Administrador</h1>
+          <p class="admin-sub">Gerencie os produtos do cardápio</p>
+        </div>
+      </div>
+
+      <!-- TABS DE NAVEGAÇÃO ADMIN -->
+      <div class="admin-tabs-wrap">
+        <input type="radio" name="admin-tab" id="tab-lista"     class="cat-input" checked>
+        <input type="radio" name="admin-tab" id="tab-adicionar" class="cat-input">
+
+        <nav class="cat-tabs">
+          <label for="tab-lista"     class="cat-tab">Produtos Cadastrados</label>
+          <label for="tab-adicionar" class="cat-tab">Adicionar Produto</label>
+        </nav>
+
+        <!-- LISTA DE PRODUTOS -->
+        <div class="admin-painel" id="painel-lista">
+
+          <div id="tab-lista-content">
+            <table class="admin-tabela">
+              <thead>
+                <tr>
+                  <th>Imagem</th>
+                  <th>Nome</th>
+                  <th>Categoria</th>
+                  <th>Preço</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><img src="img/classic-burger.jpg" alt="Burger Clássico" class="admin-thumb"></td>
+                  <td>Burger Clássico</td>
+                  <td><span class="cat-badge cat-burger">Burger</span></td>
+                  <td>R$ 28,90</td>
+                  <td class="acoes">
+                    <button class="btn-admin btn-editar">Editar</button>
+                    <button class="btn-admin btn-remover">Remover</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><img src="img/bacon-burger.jpg" alt="Burger Bacon" class="admin-thumb"></td>
+                  <td>Burger Bacon</td>
+                  <td><span class="cat-badge cat-burger">Burger</span></td>
+                  <td>R$ 34,90</td>
+                  <td class="acoes">
+                    <button class="btn-admin btn-editar">Editar</button>
+                    <button class="btn-admin btn-remover">Remover</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><img src="img/double-burger.jpg" alt="Burger Duplo" class="admin-thumb"></td>
+                  <td>Burger Duplo</td>
+                  <td><span class="cat-badge cat-burger">Burger</span></td>
+                  <td>R$ 42,90</td>
+                  <td class="acoes">
+                    <button class="btn-admin btn-editar">Editar</button>
+                    <button class="btn-admin btn-remover">Remover</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><img src="img/combo-meal.jpg" alt="Combo Individual" class="admin-thumb"></td>
+                  <td>Combo Individual</td>
+                  <td><span class="cat-badge cat-combo">Combo</span></td>
+                  <td>R$ 39,90</td>
+                  <td class="acoes">
+                    <button class="btn-admin btn-editar">Editar</button>
+                    <button class="btn-admin btn-remover">Remover</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><img src="img/soda.jpg" alt="Refrigerante" class="admin-thumb"></td>
+                  <td>Refrigerante</td>
+                  <td><span class="cat-badge cat-bebida">Bebida</span></td>
+                  <td>R$ 7,90</td>
+                  <td class="acoes">
+                    <button class="btn-admin btn-editar">Editar</button>
+                    <button class="btn-admin btn-remover">Remover</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><img src="img/milkshake.jpg" alt="Milkshake" class="admin-thumb"></td>
+                  <td>Milkshake</td>
+                  <td><span class="cat-badge cat-bebida">Bebida</span></td>
+                  <td>R$ 18,90</td>
+                  <td class="acoes">
+                    <button class="btn-admin btn-editar">Editar</button>
+                    <button class="btn-admin btn-remover">Remover</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><img src="img/brownie.jpg" alt="Brownie" class="admin-thumb"></td>
+                  <td>Brownie com Sorvete</td>
+                  <td><span class="cat-badge cat-sobremesa">Sobremesa</span></td>
+                  <td>R$ 16,90</td>
+                  <td class="acoes">
+                    <button class="btn-admin btn-editar">Editar</button>
+                    <button class="btn-admin btn-remover">Remover</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- PAINEL ADICIONAR -->
+          <div id="tab-adicionar-content">
+            <form class="admin-form" action="#" method="post" enctype="multipart/form-data">
+              <h2 class="admin-form-titulo">Novo Produto</h2>
+
+              <div class="admin-form-grid">
+                <div class="form-grupo">
+                  <label for="prod-nome">Nome do produto</label>
+                  <input type="text" id="prod-nome" name="nome" placeholder="Ex: Burger Especial" required>
+                </div>
+
+                <div class="form-grupo">
+                  <label for="prod-categoria">Categoria</label>
+                  <select id="prod-categoria" name="categoria" required>
+                    <option value="">Selecione</option>
+                    <option value="burger">Burger</option>
+                    <option value="combo">Combo</option>
+                    <option value="bebida">Bebida</option>
+                    <option value="sobremesa">Sobremesa</option>
+                  </select>
+                </div>
+
+                <div class="form-grupo">
+                  <label for="prod-preco">Preço (R$)</label>
+                  <input type="number" id="prod-preco" name="preco" placeholder="0,00" step="0.01" min="0" required>
+                </div>
+
+                <div class="form-grupo">
+                  <label for="prod-imagem">Imagem</label>
+                  <input type="file" id="prod-imagem" name="imagem" accept="image/*">
+                </div>
+
+                <div class="form-grupo form-grupo-full">
+                  <label for="prod-descricao">Descrição</label>
+                  <textarea id="prod-descricao" name="descricao" rows="3" placeholder="Descreva os ingredientes e o preparo..."></textarea>
+                </div>
+              </div>
+
+              <div class="admin-form-acoes">
+                <button type="submit" class="btn btn-primary">Salvar Produto</button>
+                <button type="reset"  class="btn btn-cancelar">Limpar</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       VIEW: SITE PRINCIPAL
+  ============================================================ -->
+  <div id="view-site">
+
+    <!-- HEADER -->
+    <header class="header">
+      <nav class="nav container">
+        <a href="#inicio" class="logo">It's Raining <span>Burgers</span></a>
+        <ul class="nav-menu">
+          <li><a href="#inicio"    class="nav-link">Início</a></li>
+          <li><a href="#cardapio"  class="nav-link">Cardápio</a></li>
+          <li><a href="#sobre"     class="nav-link">Sobre</a></li>
+          <li><a href="#contato"   class="nav-link">Contato</a></li>
+          <li><a href="#view-login" class="nav-link nav-link-entrar">Entrar</a></li>
+        </ul>
+        <button class="menu-toggle" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <div class="hero-content container">
+        <p class="hero-tag">Hamburgueria Artesanal · Curitiba</p>
+        <h1>Não é só um burger.<br>É <span>uma experiência.</span></h1>
+        <p class="hero-sub">Ingredientes frescos, blend moído todo dia e aquele sabor que você só encontra aqui.</p>
+        <div class="hero-btns">
+          <a href="#cardapio"  class="btn btn-primary">Ver Cardápio</a>
+          <a href="#promocoes" class="btn btn-outline">Ver Promoções</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFERENCIAIS -->
+    <section class="diferenciais">
+      <div class="container">
+        <div class="diferenciais-grid">
+          <div class="diferencial-card">
+            <span class="diferencial-num">01</span>
+            <h3>Blend Próprio</h3>
+            <p>Carne moída todos os dias com cortes selecionados. Nada de congelado.</p>
+          </div>
+          <div class="diferencial-card">
+            <span class="diferencial-num">02</span>
+            <h3>Pão Artesanal</h3>
+            <p>Pão brioche fresco da padaria do bairro, entregue toda manhã.</p>
+          </div>
+          <div class="diferencial-card">
+            <span class="diferencial-num">03</span>
+            <h3>Ingredientes Frescos</h3>
+            <p>Vegetais selecionados e temperos sem industrializados.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMOÇÕES -->
+    <section class="promocoes" id="promocoes">
+      <div class="container">
+        <h2 class="section-title">Promoções da Semana</h2>
+        <p class="section-sub">Aproveite nossas ofertas especiais</p>
+        <div class="promo-grid">
+
+          <div class="promo-card">
+            <div class="promo-img-wrap">
+              <img src="img/combo-meal.jpg" alt="Combo Família">
+              <span class="badge">-25%</span>
+            </div>
+            <div class="promo-body">
+              <h3>Combo Família</h3>
+              <p>4 burgers clássicos + 2 porções de fritas + 4 refrigerantes</p>
+              <div class="preco-wrap">
+                <span class="preco-antigo">R$ 119,90</span>
+                <span class="preco">R$ 89,90</span>
+              </div>
+              <a href="#cardapio" class="btn btn-primary btn-sm">Ver no Cardápio</a>
+            </div>
+          </div>
+
+          <div class="promo-card">
+            <div class="promo-img-wrap">
+              <img src="img/double-burger.jpg" alt="Burger Duplo">
+              <span class="badge">Terça</span>
+            </div>
+            <div class="promo-body">
+              <h3>Terça do Duplo</h3>
+              <p>Toda terça-feira, leve o Burger Duplo com desconto especial</p>
+              <div class="preco-wrap">
+                <span class="preco-antigo">R$ 42,90</span>
+                <span class="preco">R$ 32,90</span>
+              </div>
+              <a href="#cardapio" class="btn btn-primary btn-sm">Ver no Cardápio</a>
+            </div>
+          </div>
+
+          <div class="promo-card">
+            <div class="promo-img-wrap">
+              <img src="img/milkshake.jpg" alt="Milkshake + Brownie">
+              <span class="badge">-28%</span>
+            </div>
+            <div class="promo-body">
+              <h3>Milkshake + Brownie</h3>
+              <p>Combo sobremesa: milkshake de chocolate + brownie com sorvete</p>
+              <div class="preco-wrap">
+                <span class="preco-antigo">R$ 34,90</span>
+                <span class="preco">R$ 24,90</span>
+              </div>
+              <a href="#cardapio" class="btn btn-primary btn-sm">Ver no Cardápio</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CARDÁPIO com filtro CSS puro -->
+    <section class="cardapio" id="cardapio">
+      <div class="container">
+        <h2 class="section-title">Nosso Cardápio</h2>
+        <p class="section-sub">Escolha o seu favorito</p>
+      </div>
+
+      <div class="container cardapio-filtros">
+
+        <!-- Inputs de controle (ocultos) -->
+        <input type="radio" name="cat" id="cat-todos"      class="cat-input" checked>
+        <input type="radio" name="cat" id="cat-burger"     class="cat-input">
+        <input type="radio" name="cat" id="cat-combo"      class="cat-input">
+        <input type="radio" name="cat" id="cat-bebida"     class="cat-input">
+        <input type="radio" name="cat" id="cat-sobremesa"  class="cat-input">
+
+        <!-- Abas de categoria -->
+        <nav class="cat-tabs">
+          <label for="cat-todos"     class="cat-tab">Todos</label>
+          <label for="cat-burger"    class="cat-tab">Burgers</label>
+          <label for="cat-combo"     class="cat-tab">Combos</label>
+          <label for="cat-bebida"    class="cat-tab">Bebidas</label>
+          <label for="cat-sobremesa" class="cat-tab">Sobremesas</label>
+        </nav>
+
+        <!-- Grid de produtos -->
+        <div class="cardapio-grid">
+
+          <div class="produto-card" data-cat="burger">
+            <div class="produto-img">
+              <img src="img/classic-burger.jpg" alt="Burger Clássico">
+            </div>
+            <div class="produto-body">
+              <h3>Burger Clássico</h3>
+              <p>Blend 180g, queijo, alface, tomate, cebola e molho especial</p>
+              <div class="produto-footer">
+                <span class="preco">R$ 28,90</span>
+                <a href="#contato" class="btn btn-primary btn-sm">Pedir</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="produto-card destaque" data-cat="burger">
+            <div class="produto-img">
+              <img src="img/bacon-burger.jpg" alt="Burger Bacon">
+              <span class="tag-destaque">Mais Pedido</span>
+            </div>
+            <div class="produto-body">
+              <h3>Burger Bacon</h3>
+              <p>Blend 180g, bacon crocante, queijo cheddar, cebola caramelizada</p>
+              <div class="produto-footer">
+                <span class="preco">R$ 34,90</span>
+                <a href="#contato" class="btn btn-primary btn-sm">Pedir</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="produto-card" data-cat="burger">
+            <div class="produto-img">
+              <img src="img/double-burger.jpg" alt="Burger Duplo">
+            </div>
+            <div class="produto-body">
+              <h3>Burger Duplo</h3>
+              <p>2 blends de 150g, queijo duplo, alface, tomate e molho</p>
+              <div class="produto-footer">
+                <span class="preco">R$ 42,90</span>
+                <a href="#contato" class="btn btn-primary btn-sm">Pedir</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="produto-card" data-cat="combo">
+            <div class="produto-img">
+              <img src="img/combo-meal.jpg" alt="Combo Individual">
+            </div>
+            <div class="produto-body">
+              <h3>Combo Individual</h3>
+              <p>Burger clássico + fritas + refrigerante 350ml</p>
+              <div class="produto-footer">
+                <span class="preco">R$ 39,90</span>
+                <a href="#contato" class="btn btn-primary btn-sm">Pedir</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="produto-card" data-cat="bebida">
+            <div class="produto-img">
+              <img src="img/soda.jpg" alt="Refrigerante">
+            </div>
+            <div class="produto-body">
+              <h3>Refrigerante</h3>
+              <p>Coca-Cola, Guaraná ou Fanta · 350ml</p>
+              <div class="produto-footer">
+                <span class="preco">R$ 7,90</span>
+                <a href="#contato" class="btn btn-primary btn-sm">Pedir</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="produto-card" data-cat="bebida">
+            <div class="produto-img">
+              <img src="img/milkshake.jpg" alt="Milkshake">
+            </div>
+            <div class="produto-body">
+              <h3>Milkshake</h3>
+              <p>Chocolate, morango ou baunilha · 400ml</p>
+              <div class="produto-footer">
+                <span class="preco">R$ 18,90</span>
+                <a href="#contato" class="btn btn-primary btn-sm">Pedir</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="produto-card" data-cat="sobremesa">
+            <div class="produto-img">
+              <img src="img/brownie.jpg" alt="Brownie com Sorvete">
+            </div>
+            <div class="produto-body">
+              <h3>Brownie com Sorvete</h3>
+              <p>Brownie de chocolate com sorvete de creme e calda quente</p>
+              <div class="produto-footer">
+                <span class="preco">R$ 16,90</span>
+                <a href="#contato" class="btn btn-primary btn-sm">Pedir</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- NÚMEROS -->
+    <section class="numeros">
+      <div class="container">
+        <div class="numeros-grid">
+          <div class="numero-item">
+            <span class="numero-val">2018</span>
+            <span class="numero-label">Fundada em</span>
+          </div>
+          <div class="numero-item">
+            <span class="numero-val">+15k</span>
+            <span class="numero-label">Clientes satisfeitos</span>
+          </div>
+          <div class="numero-item">
+            <span class="numero-val">100%</span>
+            <span class="numero-label">Ingredientes frescos</span>
+          </div>
+          <div class="numero-item">
+            <span class="numero-val">4.9</span>
+            <span class="numero-label">Avaliação no Google</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="sobre" id="sobre">
+      <div class="container sobre-container">
+        <div class="sobre-img">
+          <img src="img/restaurant-interior.jpg" alt="Interior da hamburgueria It's Raining Burgers">
+        </div>
+        <div class="sobre-texto">
+          <p class="sobre-tag">Nossa História</p>
+          <h2>Feito com paixão,<br>servido com orgulho.</h2>
+          <p>A It's Raining Burgers nasceu em 2018 da paixão de dois amigos por hambúrguer de verdade. Cansados dos burgers sem graça das redes de fast food, decidimos criar algo diferente.</p>
+          <p>Nosso blend é feito com cortes selecionados, moídos frescos todo dia. O pão vem da padaria do bairro e os ingredientes são escolhidos a dedo. Nada de congelado, nada de industrializado.</p>
+          <p>Hoje atendemos toda Curitiba com delivery rápido e uma loja no coração da cidade. Nosso objetivo continua o mesmo: fazer o melhor burger que você já comeu.</p>
+          <a href="#contato" class="btn btn-primary">Entre em Contato</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="contato" id="contato">
+      <div class="container">
+        <h2 class="section-title section-title-light">Fale Conosco</h2>
+        <p class="section-sub section-sub-light">Dúvidas, sugestões ou pedidos especiais</p>
+
+        <div class="contato-wrapper">
+
+          <!-- Informações -->
+          <div class="contato-info-col">
+            <div class="contato-card">
+              <h3>Endereço</h3>
+              <p>Rua das Flores, 123<br>Centro · Curitiba · PR</p>
+            </div>
+            <div class="contato-card">
+              <h3>Telefone</h3>
+              <p>(41) 3333-4444</p>
+            </div>
+            <div class="contato-card">
+              <h3>Horários</h3>
+              <p>Seg–Qui: 18h às 23h<br>Sex–Sáb: 18h às 00h<br>Dom: 18h às 22h</p>
+            </div>
+            <div class="contato-card">
+              <h3>E-mail</h3>
+              <p>contato@itsrainingburgers.com.br</p>
+            </div>
+          </div>
+
+          <!-- Formulário de contato -->
+          <form class="contato-form" action="#" method="post">
+            <div class="form-grupo">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+            </div>
+            <div class="form-grupo">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+            </div>
+            <div class="form-grupo">
+              <label for="assunto">Assunto</label>
+              <select id="assunto" name="assunto">
+                <option value="">Selecione um assunto</option>
+                <option value="pedido">Realizar pedido</option>
+                <option value="duvida">Dúvida</option>
+                <option value="sugestao">Sugestão</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+            <div class="form-grupo">
+              <label for="mensagem">Mensagem</label>
+              <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva sua mensagem..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MAPA -->
+    <section class="mapa">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.5!2d-49.27!3d-25.43!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDI1JzQ4LjAiUyA0OcKwMTYnMTIuMCJX!5e0!3m2!1spt-BR!2sbr!4v1"
+        allowfullscreen=""
+        loading="lazy"
+        title="Localização It's Raining Burgers">
+      </iframe>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-marca">
+          <a href="#inicio" class="logo logo-footer">It's Raining <span>Burgers</span></a>
+          <p>Hamburgueria artesanal em Curitiba desde 2018. Ingredientes frescos, blend moído no dia e muito cuidado em cada detalhe.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#cardapio">Cardápio</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="#view-login">Entrar</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Cardápio</h4>
+          <ul>
+            <li><a href="#cardapio">Burgers</a></li>
+            <li><a href="#cardapio">Combos</a></li>
+            <li><a href="#cardapio">Bebidas</a></li>
+            <li><a href="#cardapio">Sobremesas</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <p>Rua das Flores, 123 · Centro</p>
+          <p>Curitiba · PR</p>
+          <p>(41) 3333-4444</p>
+          <p>contato@itsrainingburgers.com.br</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Desenvolvido por Letícia Beatriz Silva de Morais e João Pedro Pires</p>
+      </div>
+    </footer>
+
+  </div><!-- /view-site -->
+
+</body>
+</html>
